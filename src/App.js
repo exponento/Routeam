@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Input from './components/Input';
+import Button from './components/Button';
+import { useState } from 'react';
+import OutPut from './components/OutPut';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const [data, setData] = useState({items: []});
+  const [inquiry, setInquiry] = useState();
+  
 
+
+  function api (){
+    if (inquiry !== undefined) {
+      fetch(`https://api.github.com/search/repositories?q=${inquiry}`)
+      .then((response) => {response.json().then((data) => {setData(data)})})
+    } 
+  };
+
+  function callBack(value){
+    setInquiry(value)
+  };
+
+  return (
+    <div className="outPut">
+      <div className='outPut-search'>
+        <Input callBack = {callBack}/>
+        <Button link = {api} />
+      </div>
+      <OutPut data={data} />
+    </div>
+    
+
+    );
+}
 export default App;
