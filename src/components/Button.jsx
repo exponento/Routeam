@@ -1,13 +1,12 @@
 import React from "react";
-import "./button.css";
-import search from "../images/search.png"
 
+function Button (props){
 
-function Button ({link}){
     return(
-        <button className="btn" onClick={link}>
-            <img src={search} alt="" />
-        </button>
+        <>
+            <button className="dropDown-slyder-btn " >{props.img}</button>
+        </>
     )
+
 }
 export default Button

@@ -5,7 +5,7 @@ import eye from "../images/eye.png";
 import pen from "../images/pen.png"
 
 function Cards ({stargazers_count, watchers, name, autor, html_url, images}){
-    const img = {
+    const img = { 
         borderRadius: '50%',
         height: '50px',
         width: '50px',

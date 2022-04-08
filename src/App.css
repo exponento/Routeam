@@ -1,9 +1,20 @@
 .outPut{
-  max-width: 1440px;
-}
-.outPut-search{
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+}
+.outPut-card{
+  max-width: 1440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.select{
+  height: 40px;
+  width: 60px;
+  font-size: 28px;
+  margin-left: 10px;
 }
 
 .dropDownBtn{
@@ -15,12 +26,15 @@
 }
 .dropDown{
   display: flex;
-  justify-content: center;
 }
 .dropDown-slyder-btn{
   height: 62px;
   width: 62px;
+  margin: 10px;
 }
-.dropDown-slyder{
+.slyder{
   display: flex;
+}
+.none{
+  display: none;
 }
