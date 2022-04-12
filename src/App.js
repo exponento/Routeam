@@ -4,15 +4,16 @@ import Search from './components/Search';
 import { useState } from 'react';
 import DropDown from './components/DropDown';
 import Cards from './components/Cards';
-import Slider from './components/Slider';
+import Slider from './components/Slyder';
 import Button from './components/Button';
+import OutPut from './components/OutPut';
 
 function App() {
   const [data, setData] = useState([]);
   const [out, setOut] = useState([]);
   const [elements, setElements] = useState();
-  const dataLen = data.length;
-  const [sliderNone, setSliderNone] = useState('none')
+  const [sliderNone, setSliderNone] = useState('none');
+  const [index, setIndex] = useState(0)
 
   function api (url){
     const select = document.getElementById('select').value
@@ -35,51 +36,56 @@ function App() {
         )
       })
       setData(parsCards)
-      setOut(parsCards.slice(0, select))
-      changeElements(parsCards.length, select)
+      changeOut(select, parsCards.length, parsCards)
       setSliderNone('slyder')
     };
     xhr.onerror = () => {setData(<p>ERROR</p>)}
     xhr.send()
   }
 
-  function changeOut (max){
+  function changeOut (max, len, data){
     if (data !== undefined){
       const arr = []
-      const index = Math.ceil(dataLen/max)
-      const arrElem = []
-      for (let i = 0; i < max; i++){
-        arr.push(data[i])
+      for (let i = 0, step = 0; i < len/max ; i++, step = step + max*1){
+        arr.push(<OutPut key = {i} data = {data.slice(step, step + max*1)} />)
       }
       setOut(arr)
-      changeElements(dataLen, max)
+      changeElements(len, max)
     }
     
 
   }
 
-    function changeElements(max, min){
+  function changeElements(max, min){
       const arr = []
       const index = Math.ceil(max/min)
       for (let i = 0; i < index; i++){
-        arr.push(<Button key = {i}/>)
+        arr.push(<Button changeIndex = {changeIndex} current = {i} key = {i} img = {i + 1}/>)
       }
       setElements(arr)
-    }
+  }
+
+  function changeIndex(position, current){
+    if (position === 'rigth'){
+      index < out.length-1? setIndex(index + 1): setIndex(0)
+      } else if(position === 'left'){
+        index === 0? setIndex(out.length -1): setIndex(index - 1)
+    } else {setIndex(current)}
+  }
   
 
   return (
     <div >
         <Search link = {api} />
         <div>
-          <DropDown changeOut = {changeOut}/>
+          <DropDown len = {data.length} data = {data} changeOut = {changeOut}/>
         </div>
         <div className='outPut'>
-          <Slider sliderNone = {sliderNone} elements = {elements}/>
+          <Slider sliderNone = {sliderNone} changeIndex = {changeIndex} elements = {elements}/>
           <div className="outPut-card">
-            {out}
+            {out[index]}
           </div>
-          <Slider sliderNone = {sliderNone} elements = {elements}/>
+          <Slider sliderNone = {sliderNone} changeIndex = {changeIndex} elements = {elements}/>
         </div>
     </div> 
     

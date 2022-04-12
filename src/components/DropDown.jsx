@@ -4,7 +4,7 @@ function DropDown (props){
     return(
         <div className="dropDown">
             <label htmlFor=""> Вывод на странице:  
-                <select className="select" onChange={(event) => {props.changeOut(`${event.target.value}`)}} name="" id="select">
+                <select className="select" onChange={(event) => {props.changeOut(`${event.target.value}`, props.len, props.data)}} name="" id="select">
                     <option >10</option>
                     <option >25</option>
                     <option >50</option>

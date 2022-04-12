@@ -10,9 +10,9 @@ function Slider (props){
     
     return(
             <div className={props.sliderNone}>
-                <Button img = {<img src={left} alt="" />}/>
+                <Button changeIndex = {props.changeIndex} position = 'left' img = {<img src={left} alt="" />}/>
                 {props.elements}
-                <Button img = {<img src={right} alt="" />}/>                
+                <Button changeIndex = {props.changeIndex} position = 'rigth' img = {<img src={right} alt="" />}/>                
             </div>
     )
 }
